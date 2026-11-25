@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agenda do Educador</title>
+<meta name="description" content="Reuniões, avaliações e prazos da escola organizados em uma agenda feita para educadores.">
+<meta name="theme-color" content="#f5f3ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Agenda Educador">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topo">
+  <div class="topo-in">
+    <div class="marca">
+      <span class="logo" aria-hidden="true">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M8 2v3M16 2v3M3.5 9h17M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m9 15 2 2 4-4"/></svg>
+      </span>
+      <div class="marca-texto">
+        <strong>Agenda <span>do Educador</span></strong>
+        <button type="button" id="btnConta" class="conta">Informar e-mail</button>
+      </div>
+    </div>
+    <div class="topo-acoes">
+      <button type="button" id="btnExportarTudo" class="btn-topo btn-topo-destaque" title="Exportar todas as datas (.ics)" aria-label="Exportar todas as datas (.ics)">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 20h16"/></svg>
+        <span>Exportar tudo</span>
+      </button>
+      <button type="button" id="btnTema" class="btn-topo btn-topo-icone" title="Alternar tema" aria-label="Alternar entre modo escuro e claro">
+        <svg class="ico i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="ico i-lua" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button type="button" id="btnMenu" class="btn-topo btn-topo-icone" title="Mais opções" aria-label="Mais opções">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="principal">
+  <section class="intro" aria-labelledby="tituloPrincipal">
+    <div class="intro-copy">
+      <p class="sobretitulo"><span class="ponto-sobretitulo"></span> UM ANO LETIVO MAIS LEVE</p>
+      <h1 id="tituloPrincipal">Mais presença<br>na sala. <em>Menos</em><br>datas na cabeça.</h1>
+      <p class="intro-texto">Reuniões, avaliações e prazos da escola — organizados para você cuidar do que importa: ensinar.</p>
+      <button type="button" id="btnNovo" class="cta-nova">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        <span>Adicionar compromisso</span>
+      </button>
+    </div>
+    <aside class="painel-resumo" aria-label="Resumo do seu planejamento">
+      <div class="resumo-marca" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48"></circle><circle id="anelProgresso" cx="60" cy="60" r="48" class="anel-progresso"></circle></svg>
+        <span class="resumo-numero">ED</span>
+      </div>
+      <div class="resumo" aria-live="polite">
+        <p class="resumo-label">SEU PLANEJAMENTO</p>
+        <div class="resumo-linha">
+          <span id="resumoTexto"></span>
+          <span id="resumoPct" class="resumo-pct"></span>
+        </div>
+        <div class="barra"><div id="barraPreenchida" class="barra-preenchida"></div></div>
+      </div>
+      <p class="resumo-nota">Um passo de cada vez. Seu calendário fica salvo neste aparelho.</p>
+    </aside>
+    <div class="intro-selo" aria-hidden="true"><span>PLANEJAR</span><span class="selo-asterisco">✳</span><span>RESPIRAR</span></div>
+  </section>
+
+  <section class="agenda-conteudo" aria-labelledby="tituloAgenda">
+  <div class="agenda-heading">
+    <div>
+      <p class="sobretitulo sobretitulo-secundario">SEU TEMPO, BEM CUIDADO</p>
+      <h2 id="tituloAgenda">A agenda</h2>
+    </div>
+    <p class="agenda-heading-nota">Tudo o que vem pela frente,<br>em um só lugar.</p>
+  </div>
+  <nav class="abas" role="tablist" aria-label="Visões">
+    <button type="button" role="tab" class="aba ativa" data-aba="proximos" aria-selected="true">Hoje / Próximos Dias</button>
+    <button type="button" role="tab" class="aba" data-aba="completo" aria-selected="false">Calendário Completo</button>
+  </nav>
+
+  <section class="filtros">
+    <label class="busca">
+      <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="busca" placeholder="Buscar por palavra-chave" autocomplete="off" aria-label="Buscar datas">
+    </label>
+    <div class="chips" id="chips" role="group" aria-label="Filtrar por categoria"></div>
+    <div class="filtros-extra">
+      <label class="check-simples">
+        <input type="checkbox" id="ocultarConcluidas">
+        <span>Ocultar concluídas</span>
+      </label>
+      <button type="button" id="btnHoje" class="link-btn" hidden>Ir para hoje ↓</button>
+    </div>
+  </section>
+
+  <div id="lista" class="lista"></div>
+  </section>
+  <footer class="rodape">
+    <span>AGENDA DO EDUCADOR</span>
+    <span>Seus dados ficam só neste navegador.</span>
+  </footer>
+</main>
+
+<button type="button" id="btnNovoRapido" class="fab" aria-label="Adicionar nova data" title="Adicionar nova data">
+  <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+  <span>Nova data</span>
+</button>
+
+<div class="camada" id="folhaEvento" hidden>
+  <div class="folha" role="dialog" aria-modal="true" aria-labelledby="tituloFolha">
+    <div class="folha-topo">
+      <h2 id="tituloFolha">Nova data</h2>
+      <button type="button" class="fechar" data-fechar aria-label="Fechar">✕</button>
+    </div>
+    <form id="formEvento" novalidate>
+      <label class="campo">
+        <span>Título do evento</span>
+        <input type="text" id="campoTitulo" maxlength="200" placeholder="Ex.: Reunião de pais" required>
+      </label>
+      <div class="grade-3">
+        <label class="campo">
+          <span>Data</span>
+          <input type="date" id="campoData" required>
+        </label>
+        <label class="campo">
+          <span>Início</span>
+          <input type="time" id="campoHora">
+        </label>
+        <label class="campo">
+          <span>Fim</span>
+          <input type="time" id="campoFim">
+        </label>
+      </div>
+      <p class="dica">Sem horário de início, o evento é salvo como dia inteiro.</p>
+      <label class="campo">
+        <span>Categoria</span>
+        <select id="campoCategoria"></select>
+      </label>
+      <label class="campo">
+        <span>Observações</span>
+        <textarea id="campoObs" rows="3" maxlength="600" placeholder="Detalhes, local, link da reunião..."></textarea>
+      </label>
+      <label class="check-linha">
+        <input type="checkbox" id="campoRepete">
+        <span>Repetir toda semana até o fim do ano</span>
+      </label>
+      <div class="folha-acoes">
+        <button type="button" class="btn btn-fantasma" data-fechar>Cancelar</button>
+        <button type="submit" class="btn btn-primario">Salvar data</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="camada" id="folhaMenu" hidden>
+  <div class="folha" role="dialog" aria-modal="true" aria-labelledby="tituloMenu">
+    <div class="folha-topo">
+      <h2 id="tituloMenu">Opções</h2>
+      <button type="button" class="fechar" data-fechar aria-label="Fechar">✕</button>
+    </div>
+    <label class="campo">
+      <span>Lembrete nos arquivos .ics</span>
+      <select id="campoAlarme">
+        <option value="0">No horário do evento</option>
+        <option value="10">10 minutos antes</option>
+        <option value="30">30 minutos antes</option>
+        <option value="60">1 hora antes</option>
+        <option value="1440">1 dia antes</option>
+      </select>
+    </label>
+    <div class="menu-lista">
+      <button type="button" class="menu-item" data-menu="conta">Trocar e-mail Google</button>
+      <button type="button" class="menu-item" data-menu="ics-pendentes">Exportar somente pendentes (.ics)</button>
+      <button type="button" class="menu-item" data-menu="backup">Exportar backup (JSON)</button>
+      <button type="button" class="menu-item" data-menu="importar">Importar backup (JSON)</button>
+      <button type="button" class="menu-item menu-item-perigo" data-menu="restaurar">Restaurar lista inicial</button>
+    </div>
+    <p class="dica">Seus dados ficam salvos somente neste navegador. Faça backup de vez em quando.</p>
+    <input type="file" id="arquivoBackup" accept="application/json,.json" hidden>
+  </div>
+</div>
+
+<div class="camada camada-centro" id="telaAcesso" hidden>
+  <div class="folha acesso" role="dialog" aria-modal="true" aria-labelledby="tituloAcesso">
+    <div class="acesso-logo" aria-hidden="true">
+      <svg class="ico" viewBox="0 0 24 24"><path d="M8 2v3M16 2v3M3.5 9h17M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m9 15 2 2 4-4"/></svg>
+    </div>
+    <h2 id="tituloAcesso">Bem-vindo(a), educador(a)</h2>
+    <p class="acesso-texto">Informe o e-mail Google que você usa no celular. Sem senha: ele serve apenas para abrir os eventos na conta certa do Google Agenda e fica salvo só neste aparelho.</p>
+    <form id="formAcesso" novalidate>
+      <label class="campo">
+        <span>E-mail Google</span>
+        <input type="email" id="campoEmail" inputmode="email" autocomplete="email" placeholder="voce@gmail.com">
+      </label>
+      <p class="erro" id="erroEmail" hidden>Digite um e-mail válido.</p>
+      <button type="submit" class="btn btn-primario btn-bloco">Continuar</button>
+      <button type="button" id="btnSemEmail" class="btn btn-fantasma btn-bloco">Usar sem e-mail</button>
+      <button type="button" id="btnCancelarAcesso" class="btn btn-fantasma btn-bloco" hidden>Cancelar</button>
+    </form>
+  </div>
+</div>
+
+<div id="aviso" class="aviso" role="status" aria-live="polite" hidden></div>
+
+<script src="script.js"></script>
+</body>
+</html>
